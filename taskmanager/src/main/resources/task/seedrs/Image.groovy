@@ -1,7 +1,7 @@
 package task.seedrs
 
-import com.arloor.spidertask.Step
-import com.arloor.spidertask.StepContext
+import com.arloor.taskmanager.Step
+import com.arloor.taskmanager.StepContext
 import org.apache.http.HttpEntity
 import org.apache.http.client.methods.CloseableHttpResponse
 import org.apache.http.client.methods.HttpGet
