@@ -18,7 +18,7 @@
     <dependencies>
         <dependency>
             <groupId>com.arloor</groupId>
-            <artifactId>spidertask</artifactId>
+            <artifactId>taskmanager</artifactId>
             <version>3.0</version>
         </dependency>
     </dependencies>

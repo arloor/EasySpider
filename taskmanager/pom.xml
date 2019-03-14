@@ -10,7 +10,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>spidertask</artifactId>
+    <artifactId>taskmanager</artifactId>
     <dependencies>
         <dependency>
             <groupId>org.codehaus.groovy</groupId>

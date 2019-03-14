@@ -1,8 +1,8 @@
 package com.arloor.spider;
 
 import com.alibaba.fastjson.JSONObject;
-import com.arloor.spidertask.StepContainer;
-import com.arloor.spidertask.StepContext;
+import com.arloor.taskmanager.StepContainer;
+import com.arloor.taskmanager.StepContext;
 
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;

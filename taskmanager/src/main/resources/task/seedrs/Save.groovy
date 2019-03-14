@@ -2,7 +2,7 @@ package task.seedrs
 
 import com.alibaba.fastjson.JSONObject
 
-class Save implements com.arloor.spidertask.Save {
+class Save implements com.arloor.taskmanager.Save {
     @Override
     void save(JSONObject data) {
 

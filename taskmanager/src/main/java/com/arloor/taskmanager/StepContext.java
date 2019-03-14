@@ -1,4 +1,4 @@
-package com.arloor.spidertask;
+package com.arloor.taskmanager;
 
 import com.alibaba.fastjson.JSONObject;
 
