@@ -13,7 +13,11 @@ class Save implements com.arloor.taskmanager.Save {
         int year=2017-page
         String market=data.getString("market")
         println("save "+href)
-        String dirpath="E:\\seedrs\\content\\posts\\seedrs\\"
+        String dirpath="seedrs/"
+        File saveDir=new File(dirpath)
+        if(!saveDir.exists()){
+            saveDir.mkdirs()
+        }
         File file=new File(dirpath+href+".md")
         if(!file.exists()){
             file.createNewFile()

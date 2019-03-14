@@ -17,12 +17,12 @@ class Image implements Step{
     void doParse(CloseableHttpResponse response, StepContext context) {
         String path=new URI(context.url).path
 
-        String saveDirPath="E:/seedrs/static/img/seedrs"+path.substring(0,path.lastIndexOf("/"))
+        String saveDirPath="seedrs"+path.substring(0,path.lastIndexOf("/"))
         File saveDir=new File(saveDirPath)
         if(!saveDir.exists()){
             saveDir.mkdirs()
         }
-        File img=new File("E:/seedrs/static/img/seedrs"+path)
+        File img=new File("seedrs"+path)
         if(!img.exists()){
             img.createNewFile()
         }

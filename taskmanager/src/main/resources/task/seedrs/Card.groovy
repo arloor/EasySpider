@@ -3,6 +3,7 @@ package task.seedrs
 import com.alibaba.fastjson.JSONObject
 import com.arloor.taskmanager.Step
 import com.arloor.taskmanager.StepContext
+import org.apache.http.Header
 import org.apache.http.client.methods.CloseableHttpResponse
 import org.apache.http.client.methods.HttpGet
 import org.apache.http.client.methods.HttpUriRequest
@@ -36,7 +37,7 @@ class Card implements Step{
                 Element node=nodes.get(j)
                 String tagName=node.tagName();
                 if(tagName=="img"){
-                    sb.append "![]("+node.attr("src").replaceAll("https://seedrs.imgix.net","/img/seedrs")+")\n\n"
+                    sb.append "![]("+node.attr("src").replaceAll("https://seedrs.imgix.net","seedrs")+")\n\n"
                     StepContext newContext=new StepContext();
                     newContext.setUrl(node.attr("src"))
                     newContext.setCurrentStep("Image");
