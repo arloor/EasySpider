@@ -21,7 +21,6 @@ public class StepContainer {
         GroovyClassLoader loader = new GroovyClassLoader();
 
         java.net.URL uri = StepContainer.class.getResource("/task/seedrs");
-        System.out.println(uri.getPath());
         File dir = new File(uri.getPath());
         File[] groovyFiles = dir.listFiles();
         for (File groovyFile : groovyFiles

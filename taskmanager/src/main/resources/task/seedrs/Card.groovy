@@ -17,7 +17,7 @@ import org.jsoup.select.Elements
 class Card implements Step{
     @Override
     HttpUriRequest createRequest(StepContext context) {
-        HttpGet request=new HttpGet(context.getUrl());
+        HttpGet request=new HttpGet(context.getUrl())
         return request
     }
 
