@@ -25,6 +25,7 @@ public class Graber implements Runnable {
             if (!stepName.equals("Save")) {
                 Step step = StepContainer.getStepByName(stepName);
                 HttpUriRequest request = step.createRequest(stepContext);
+                //增加cookie
                 String cookieHeader =stepContext.getCookieHeader();
                 if (cookieHeader != null) {
 //                    logger.info("Cookie: {}",cookieHeader);
@@ -48,6 +49,7 @@ public class Graber implements Runnable {
                         }
                     }
                     Main.stepQueue.addAll(newStepContexts);
+                    //增加cookie
                     Header[] setCookies = response.getHeaders("Set-Cookie");
                     for (Header setCookie : setCookies
                     ) {
