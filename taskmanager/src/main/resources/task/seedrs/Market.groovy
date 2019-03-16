@@ -35,8 +35,8 @@ class Market implements Step{
                 Element node=nodes.get(j)
                 String tagName=node.tagName();
                 if(tagName=="img"){
-                    sb.append "![]("+node.attr("src")+")\n\n"
-                    StepContext newContext=new StepContext();
+                    sb.append "![]("+node.attr("src").replaceAll("https://seedrs.imgix.net/","")+")\n\n"
+                    StepContext newContext=StepContext.derive(context);
                     newContext.setUrl(node.attr("src"))
                     newContext.setCurrentStep("Image");
                     context.newStepContexts.add(newContext)

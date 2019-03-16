@@ -18,7 +18,6 @@ class Index implements Step{
     @Override
     HttpUriRequest createRequest(StepContext context) {
         HttpGet request=new HttpGet(context.getUrl())
-        request.addHeader("Cookie","a=b")
         return request
     }
 
@@ -35,12 +34,10 @@ class Index implements Step{
             String href1=href.substring(1)
             context.data.put("href",href1)
             context.data.put("name",element.attr("data-campaign-name"))
-            JSONObject newData=context.data.clone()
 
-            StepContext newContext=new StepContext();
+            StepContext newContext=StepContext.derive(context);
             newContext.setCurrentStep("Card")
             newContext.setUrl("https://www.seedrs.com"+href)
-            newContext.setData(newData)
             context.getNewStepContexts().add(newContext)
         }
 

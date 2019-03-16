@@ -1,9 +1,7 @@
 package task.seedrs
 
-import com.alibaba.fastjson.JSONObject
 import com.arloor.taskmanager.Step
 import com.arloor.taskmanager.StepContext
-import org.apache.http.Header
 import org.apache.http.client.methods.CloseableHttpResponse
 import org.apache.http.client.methods.HttpGet
 import org.apache.http.client.methods.HttpUriRequest
@@ -37,8 +35,8 @@ class Card implements Step{
                 Element node=nodes.get(j)
                 String tagName=node.tagName();
                 if(tagName=="img"){
-                    sb.append "![]("+node.attr("src").replaceAll("https://seedrs.imgix.net","seedrs")+")\n\n"
-                    StepContext newContext=new StepContext();
+                    sb.append "![]("+node.attr("src").replaceAll("https://seedrs.imgix.net/","")+")\n\n"
+                    StepContext newContext=StepContext.derive(context);
                     newContext.setUrl(node.attr("src"))
                     newContext.setCurrentStep("Image");
                     context.newStepContexts.add(newContext)
@@ -55,10 +53,8 @@ class Card implements Step{
                 }
             }
             String content=sb.toString()
-            StepContext newContext=new StepContext()
-            JSONObject data=context.data.clone()
-            data.put("idea",content)
-            newContext.setData(data)
+            StepContext newContext=StepContext.derive(context);
+            newContext.data.put("idea",content)
             Elements navs=doc.select(".Tabs-nav.Tabs-async.js-campaign-nav li")
             boolean marketExists=false
             for (int j = 0; j < navs.size(); j++) {
