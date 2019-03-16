@@ -15,7 +15,7 @@ import java.util.List;
 
 public class Graber implements Runnable {
     private static Logger logger= LoggerFactory.getLogger(Graber.class);
-    MyHttpClient client = new MyHttpClient(700);
+    MyHttpClient client = new MyHttpClient(400);
 
     @Override
     public void run() {

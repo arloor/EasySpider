@@ -78,7 +78,7 @@ public class MyHttpClient {
                 .custom()
                 .setDefaultRequestConfig(requestConfig)
                 .setSSLSocketFactory(sslSocketFactory)
-                .setProxy(new HttpHost("localhost",8888))
+                .setProxy(new HttpHost("localhost",8081))
                 .build();
         this.waittime = waittime;
         this.retryNum = retryNum;
