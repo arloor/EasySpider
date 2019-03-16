@@ -36,9 +36,8 @@ class Market implements Step{
                 String tagName=node.tagName();
                 if(tagName=="img"){
                     sb.append "![]("+node.attr("src").replaceAll("https://seedrs.imgix.net/","")+")\n\n"
-                    StepContext newContext=StepContext.derive(context);
+                    StepContext newContext=StepContext.derive(context,"Image");
                     newContext.setUrl(node.attr("src"))
-                    newContext.setCurrentStep("Image");
                     context.newStepContexts.add(newContext)
                 }
                 if(tagName.startsWith("h")){
@@ -53,11 +52,8 @@ class Market implements Step{
                 }
             }
             String content=sb.toString()
-            StepContext newContext=new StepContext()
-            JSONObject data=context.data.clone()
-            data.put("market",content)
-            newContext.setData(data)
-            newContext.setCurrentStep("Save")
+            StepContext newContext=StepContext.derive(context,"Save")
+            newContext.data.put("market",content)
             context.newStepContexts.add(newContext)
 
             //下载图片

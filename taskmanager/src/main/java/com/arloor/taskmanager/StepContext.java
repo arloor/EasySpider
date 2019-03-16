@@ -27,8 +27,9 @@ public class StepContext {
     }
 
     //由老的stepContext创建新的Stepcontext
-    public static StepContext derive(StepContext oldContext){
+    public static StepContext derive(StepContext oldContext,String nextStep){
         StepContext newContext=new StepContext();
+        newContext.setCurrentStep(nextStep);
         newContext.setData((JSONObject) oldContext.data.clone());
         return newContext;
     }

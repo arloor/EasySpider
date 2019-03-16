@@ -35,8 +35,7 @@ class Index implements Step{
             context.data.put("href",href1)
             context.data.put("name",element.attr("data-campaign-name"))
 
-            StepContext newContext=StepContext.derive(context);
-            newContext.setCurrentStep("Card")
+            StepContext newContext=StepContext.derive(context,"Card")
             newContext.setUrl("https://www.seedrs.com"+href)
             context.getNewStepContexts().add(newContext)
         }

@@ -36,9 +36,8 @@ class Card implements Step{
                 String tagName=node.tagName();
                 if(tagName=="img"){
                     sb.append "![]("+node.attr("src").replaceAll("https://seedrs.imgix.net/","")+")\n\n"
-                    StepContext newContext=StepContext.derive(context);
+                    StepContext newContext=StepContext.derive(context,"Image");
                     newContext.setUrl(node.attr("src"))
-                    newContext.setCurrentStep("Image");
                     context.newStepContexts.add(newContext)
                 }
                 if(tagName.startsWith("h")){
@@ -53,21 +52,21 @@ class Card implements Step{
                 }
             }
             String content=sb.toString()
-            StepContext newContext=StepContext.derive(context);
-            newContext.data.put("idea",content)
+            StepContext newContext=null
             Elements navs=doc.select(".Tabs-nav.Tabs-async.js-campaign-nav li")
             boolean marketExists=false
             for (int j = 0; j < navs.size(); j++) {
                 if(navs.get(j).attr("data-section")=="market"){
+                    newContext=StepContext.derive(context,"Market");
                     newContext.setUrl("https://www.seedrs.com"+navs.get(j).attr("data-tab-url"))
                     marketExists=true
-                    newContext.setCurrentStep("Market")
                     break
                 }
             }
             if(!marketExists){
-                newContext.setCurrentStep("Save")
+                newContext=StepContext.derive(context,"Save");
             }
+            newContext.data.put("idea",content)
             context.newStepContexts.add(newContext)
 
             //下载图片
