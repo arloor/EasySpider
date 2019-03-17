@@ -23,7 +23,7 @@ groovy执行引擎完成，spider雏形实现。
 1. 将保存任务的queue使用消息队列保存
 2. 缺少一个网关来提交任务开始的标志
 
-# Release v1.0
+# [Release v1.0](https://github.com/arloor/EasySpider/tree/f987ff7a71e92a2fd69562db44dd8d27bd5ff71b)
 
 这是EasySpider的第一版。还很简单，源码读起来也轻松，要看代码，从这一版开始吧。之后就会引入分布式了亲。
 
