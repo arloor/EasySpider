@@ -22,49 +22,44 @@ public class Graber implements Runnable {
         StepContext stepContext = null;
         while ((stepContext = Main.stepQueue.poll()) != null) {
             String stepName = stepContext.getCurrentStep();
-            if (!stepName.equals("Save")) {
-                Step step = StepContainer.getStepByName(stepName);
-                HttpUriRequest request = step.createRequest(stepContext);
-                //增加cookie
-                String cookieHeader =stepContext.getCookieHeader();
-                if (cookieHeader != null) {
+            Step step = StepContainer.getStepByName(stepName);
+            HttpUriRequest request = step.createRequest(stepContext);
+            //增加cookie
+            String cookieHeader =stepContext.getCookieHeader();
+            if (cookieHeader != null) {
 //                    logger.info("Cookie: {}",cookieHeader);
-                    request.setHeader("Cookie", cookieHeader);
-                }
-                System.out.println(request);
-                CloseableHttpResponse response = client.doRequest(request);
-                if (response == null) {
-                    continue;
-                }
-                try {
-                    step.doParse(response, stepContext);
-                    List<StepContext> newStepContexts = stepContext.getNewStepContexts();
-                    //遍历，找到Save的任务，直接save。这里保证了save命令提前运行。
-                    Iterator<StepContext> iterator=newStepContexts.iterator();
-                    while(iterator.hasNext()){
-                        StepContext newStepContext=iterator.next();
-                        if(newStepContext.getCurrentStep().equals("Save")){
-                            StepContainer.getSave().save(newStepContext.getData());
-                            iterator.remove();
-                        }
-                    }
-                    Main.stepQueue.addAll(newStepContexts);
-                    //增加cookie
-                    Header[] setCookies = response.getHeaders("Set-Cookie");
-                    for (Header setCookie : setCookies
-                    ) {
-                        newStepContexts.forEach(cell -> {
-                            cell.addCookie(setCookie.getValue());
-                        });
-                    }
-                    response.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                //不应该走到这里哦，因为save会直接做的
+                request.setHeader("Cookie", cookieHeader);
             }
-
+            System.out.println(request);
+            CloseableHttpResponse response = client.doRequest(request);
+            if (response == null) {
+                continue;
+            }
+            try {
+                step.doParse(response, stepContext);
+                List<StepContext> newStepContexts = stepContext.getNewStepContexts();
+                //遍历，找到Save的任务，直接save。这里保证了save命令提前运行。
+                Iterator<StepContext> iterator=newStepContexts.iterator();
+                while(iterator.hasNext()){
+                    StepContext newStepContext=iterator.next();
+                    if(newStepContext.getCurrentStep().equals("Save")){
+                        StepContainer.getSave().save(newStepContext.getData());
+                        iterator.remove();
+                    }
+                }
+                Main.stepQueue.addAll(newStepContexts);
+                //增加cookie
+                Header[] setCookies = response.getHeaders("Set-Cookie");
+                for (Header setCookie : setCookies
+                ) {
+                    newStepContexts.forEach(cell -> {
+                        cell.addCookie(setCookie.getValue());
+                    });
+                }
+                response.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
