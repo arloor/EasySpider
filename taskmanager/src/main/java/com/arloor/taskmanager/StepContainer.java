@@ -18,6 +18,10 @@ public class StepContainer {
     private static Save save;
 
     static {
+        loadGroovy();
+    }
+
+    public static void loadGroovy(){
         GroovyClassLoader loader = new GroovyClassLoader();
 
         java.net.URL uri = StepContainer.class.getResource("/task/seedrs");
